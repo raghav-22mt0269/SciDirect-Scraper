@@ -69,10 +69,7 @@ class ScienceDirect(browser.Chrome):
         chromeProfile = "\Includes\Data_files\data\Chrome_profile"
         browser_path = "C:\Program Files\Google\Chrome\Application\chrome.exe"
         print(f"Browser Executable Path is : {os.path.join(script_dir,browser_path)}")
-        super(ScienceDirect, self).__init__(options=chrome_options,
-                                            browser_executable_path=browser_path,#os.getcwd()+
-                                            suppress_welcome=True,debug=True,keep_alive=False,
-                                            user_multi_procs=False)#user_data_dir= os.getcwd()+chromeProfile), version_main=114,
+        super(ScienceDirect, self).__init__(options=chrome_options,keep_alive=True)#user_data_dir= os.getcwd()+chromeProfile), version_main=114,
         self.keep_alive = keep_alive
         #self.implicitly_wait(15)
         self.maximize_window()

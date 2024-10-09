@@ -1,5 +1,5 @@
 
-import subprocess, random
+import subprocess, random, os
 
 from plyer import notification
 
@@ -29,11 +29,14 @@ def ChangeVPN():
                      "Mongolia","Laos","Bangladesh","Uzbekistan","Myanmar","Nepal","Brunei","Bhutan",'Venezuela',
                      '"United Kingdom"', '"United States"',"Japan", "Germay", '"Hong Kong"', "Netherlands",'Bolivia',
                      "Switzerland","Algeria","France","Egypt"] 
-    b = random.choice(countries)
-    print(f"Selected Country is {b}")
-        
-    process = subprocess.Popen(["powershell",".\expresso.exe", "connect", "--change",
-                            b],shell=True)
+    choice = random.choice(countries)
+    print(f"Selected Country is {choice}")
+    os.environ["ExpressVPN"] = os.pathsep + r"C:\Program Files (x86)\ExpressVPN\services"
+    
+    process = subprocess.Popen(["powershell", "ExpressVPN.CLI.exe", "disconnect"], shell=True)
+    result = process.communicate()[0]
+    print(result)
+    process = subprocess.Popen(["powershell", "ExpressVPN.CLI.exe", "connect", f"{str(choice)}"], shell=True)
     result = process.communicate()[0]
     print(result)
     
